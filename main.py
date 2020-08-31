@@ -1,3 +1,5 @@
+#!/bin/python
+
 import pandas as pd
 import glob as glob
 
@@ -17,23 +19,17 @@ all_files = glob.glob(path + "*.csv")
 new_path = glob.glob(r'csvfiles1/')
 
 for filename in all_files:
+    print('\n source path : {filename}')
+    print('destination path : csvfiles1/{filename.split('/')[1]}')
     df = pd.read_csv(filename, header=None,skiprows=1,names=header_names)
-    print('source path : ', filename)
-    file = filename.split('/')
-    pp = "{}/{}".format("csvfiles1", file[1])
-    print('destination path : ', pp)
     df.to_csv(pp, index = False, header=True)
-    print('\n')
 
 print('£££ modified files exported to new location! \n')
 
-print('==> read files from destination path <==')
+print('==> read files from destination path <== \n')
 
-destinationPath = r'csvfiles1/'
-files = glob.glob(destinationPath + "*.csv")
-print('\n')
+files = glob.glob(r'csvfiles1/*.csv")
+
 for destFile in files:
-    dfs = pd.read_csv(destFile, sep=";")
-    print('log1 ')
-    print(dfs)
-    print('\n')
+    print('\n log1', pd.read_csv(destFile, sep=";"))
+    
